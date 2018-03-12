@@ -1,4 +1,4 @@
-package hughpearse.textToSpeechReader;
+package hughpearse.myapplication004;
 
 import android.content.ComponentName;
 import android.content.Context;

@@ -1,8 +1,9 @@
-package hughpearse.textToSpeechReader;
+package hughpearse.myapplication004;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +21,7 @@ public class ExampleInstrumentedTest {
     public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
-
-        assertEquals("hughpearse.myapplication004", appContext.getPackageName());
+        Log.d("TAG", appContext.getPackageName());
+        assertEquals("hughpearse.textToSpeechReader", appContext.getPackageName());
     }
 }

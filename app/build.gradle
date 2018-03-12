@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "hughpearse.texttospeechereader"
+        applicationId "hughpearse.myapplication004"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 4
+        versionCode 5
         versionName "1.0a"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -25,4 +25,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile 'org.solovyev.android:checkout:1.2.1'
 }

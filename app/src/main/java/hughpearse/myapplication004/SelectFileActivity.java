@@ -1,4 +1,4 @@
-package hughpearse.textToSpeechReader;
+package hughpearse.myapplication004;
 
 import android.content.Intent;
 import android.net.Uri;
