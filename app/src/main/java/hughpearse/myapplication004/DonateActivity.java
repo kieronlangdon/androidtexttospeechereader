@@ -80,10 +80,10 @@ public class DonateActivity extends AppCompatActivity {
                 .loadAllPurchases()
                 .loadSkus(ProductTypes.IN_APP, getInAppSkus()), new InventoryCallback());
 
-        Button donateButton1 = findViewById(R.id.donateButton1);
-        Button donateButton5 = findViewById(R.id.donateButton5);
-        Button donateButton10 = findViewById(R.id.donateButton10);
-        Button donateButton15 = findViewById(R.id.donateButton15);
+        Button donateButton1 = (Button) findViewById(R.id.donateButton1);
+        Button donateButton5 = (Button) findViewById(R.id.donateButton5);
+        Button donateButton10 = (Button) findViewById(R.id.donateButton10);
+        Button donateButton15 = (Button) findViewById(R.id.donateButton15);
 
         donateButton1.setOnClickListener(new View.OnClickListener() {
             @Override
