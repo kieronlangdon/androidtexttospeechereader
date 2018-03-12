@@ -8,6 +8,8 @@ import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.ArrayList;
@@ -16,11 +18,13 @@ public class ReaderActivity extends AppCompatActivity {
 
     private static final String TAG = "Class-ReaderActivity";
     EditText textBox;
-    ArrayList<String> sentences = new ArrayList<String>();
+    Button playPause;
+    ArrayList<String> sentences = new ArrayList<>();
     MyTTSService tts;
     boolean isBound = false;
     Integer offsetStart = 0;
     Integer offsetFinish = 0;
+    boolean playing = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,18 @@ public class ReaderActivity extends AppCompatActivity {
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
         setContentView(R.layout.activity_reader);
         textBox = (EditText) findViewById(R.id.readerTextArea);
+        playPause = (Button) findViewById(R.id.playPause);
+        playPause.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                if(playing){
+                    playPause.setText("Paused");
+                    playing = false;
+                } else {
+                    playPause.setText("Playing");
+                    playing = true;
+                }
+            }
+        });
         Intent intentExtras = getIntent();
         Bundle extrasBundle = intentExtras.getExtras();
         sentences = extrasBundle.getStringArrayList("sentences");
@@ -65,6 +81,13 @@ public class ReaderActivity extends AppCompatActivity {
             tts.speak(sentence, this);
             updateUI(sentence);
             tts.waitToFinishSpeaking();
+            while(!playing){
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    Log.d(TAG, e.toString());
+                }
+            }
         }
     }
 

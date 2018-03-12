@@ -11,8 +11,11 @@ import org.solovyev.android.checkout.Checkout;
 import org.solovyev.android.checkout.EmptyRequestListener;
 import org.solovyev.android.checkout.Inventory;
 import org.solovyev.android.checkout.ProductTypes;
+import org.solovyev.android.checkout.Inventory.Product;
 import org.solovyev.android.checkout.Purchase;
 import org.solovyev.android.checkout.RequestListener;
+import org.solovyev.android.checkout.Sku;
+import org.solovyev.android.checkout.Skus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,10 +64,30 @@ public class DonateActivity extends AppCompatActivity {
         };
     }
 
+
+
     private class InventoryCallback implements Inventory.Callback {
         @Override
         public void onLoaded(Inventory.Products products) {
-            // your code here
+            Button donateButton1 = (Button) findViewById(R.id.donateButton1);
+            Button donateButton5 = (Button) findViewById(R.id.donateButton5);
+            Button donateButton10 = (Button) findViewById(R.id.donateButton10);
+            Button donateButton15 = (Button) findViewById(R.id.donateButton15);
+
+            for(Product p : products){
+                for(Sku sku : p.getSkus()){
+                    if(sku.id.code == "donate_1_euro"){
+                        donateButton1.setText("Donate €" + sku.detailedPrice.toString());
+                    } else if(sku.id.code == "donate_5_euro"){
+                        donateButton5.setText("Donate €" + sku.detailedPrice.toString());
+                    } else if(sku.id.code == "donate_10_euro"){
+                        donateButton10.setText("Donate €" + sku.detailedPrice.toString());
+                    } else if(sku.id.code == "donate_15_euro"){
+                        donateButton15.setText("Donate €" + sku.detailedPrice.toString());
+                    }
+                }
+
+            }
         }
     }
 
@@ -77,7 +100,7 @@ public class DonateActivity extends AppCompatActivity {
         mCheckout.createPurchaseFlow(new PurchaseListener());
         mInventory = mCheckout.makeInventory();
         mInventory.load(Inventory.Request.create()
-                .loadAllPurchases()
+                //.loadAllPurchases()
                 .loadSkus(ProductTypes.IN_APP, getInAppSkus()), new InventoryCallback());
 
         Button donateButton1 = (Button) findViewById(R.id.donateButton1);
